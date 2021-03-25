@@ -11,4 +11,8 @@ userService.getUserById = async (userId) => {
   });
 };
 
+userService.saveUserActivity = async ({ user_id, activity }) => {
+  await authModels.activity_store.create({ user_id, activity });
+};
+
 export default userService;
