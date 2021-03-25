@@ -8,26 +8,24 @@ const userSchema = new mongoose.Schema({
 
   email: {
     type: String,
-  },
-
-  role: {
-    type: String,
-    enum: ['ROOT', 'ROOT OPERATOR', 'MERCHANT', 'OPERATOR'],
-    default: 'MERCHANT',
+    required: true,
+    unique: true,
   },
 
   password: {
     type: String,
+    required: true,
   },
 
   is_email_verified: {
     type: Boolean,
     default: false,
   },
+
   is_deleted: {
     type: Boolean,
     default: false,
   },
 });
 
-export default mongoose.model('user_models', userSchema);
+export default mongoose.model('auth_users', userSchema);
