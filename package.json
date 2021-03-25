@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "NODE_ENV=local nodemon -r esm src/index.js"
   },
   "repository": {
     "type": "git",
@@ -27,10 +28,13 @@
     "md5": "^2.3.0",
     "mongoose": "^5.12.2",
     "nanoid": "^3.1.22",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "pnpm": "^5.18.8"
   },
   "devDependencies": {
+    "@babel/core": "^7.13.10",
     "@babel/eslint-parser": "^7.12.1",
+    "@babel/preset-env": "^7.13.12",
     "eslint": "^7.2.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-madhouselabs": "1.1.4",

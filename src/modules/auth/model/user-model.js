@@ -3,12 +3,7 @@ import mongoose from 'mongoose';
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required:true
-  },
-
-  manager_id: {
-    type: mongoose.Types.ObjectId,
-    default: null,
+    required: true,
   },
 
   email: {
