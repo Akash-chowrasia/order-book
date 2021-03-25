@@ -1,10 +1,12 @@
 import './modules/db';
 import { finishApp, getAnApp } from './app';
+import authModule from './modules/auth';
 
 const PORT = 8001;
 
 const app = getAnApp();
 
+authModule.init(app);
 
 finishApp(app);
 
