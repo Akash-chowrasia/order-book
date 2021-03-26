@@ -26,6 +26,11 @@ const schema = mongoose.Schema({
     type: Number,
     default: 1,
   },
+
+  date: {
+    type: Date,
+    default: Date,
+  },
 });
 
 export default mongoose.model('product', schema);

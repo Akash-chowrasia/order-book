@@ -2,7 +2,7 @@ import { Router } from 'express';
 import productRouter from './router';
 
 const router = Router();
-router.use('/auth', productRouter);
+router.use('/product', productRouter);
 
 const productModule = {
   init: (app) => {

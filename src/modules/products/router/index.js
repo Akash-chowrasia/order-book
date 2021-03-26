@@ -5,8 +5,8 @@ import walletRouter from './wallet-route';
 
 const router = Router();
 
-router.use('/bye', buyerRouter);
-router.use('/sell', sellerRouter);
+router.use('/buyer', buyerRouter);
+router.use('/seller', sellerRouter);
 router.use('/wallet', walletRouter);
 
 export default router;
