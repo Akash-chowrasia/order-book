@@ -3,6 +3,7 @@ import createError from 'http-errors-lite';
 import { StatusCodes } from 'http-status-codes';
 import md5 from 'md5';
 import { nanoid } from 'nanoid';
+import productModels from '../../products/model';
 import authModels from '../model';
 
 const authService = {};
@@ -30,6 +31,8 @@ authService.registerUser = async (data) => {
     ...data,
     password: hashedPassword,
   });
+
+  await productModels.wallet.create({ user_id: user._id });
   return {
     id: user._id,
     verification_code: await genVerificationCode(email),

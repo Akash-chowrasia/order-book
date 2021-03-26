@@ -55,4 +55,21 @@ buyerRouter.post(
   })
 );
 
+buyerRouter.get(
+  '/history',
+  authMiddleware.isLoggedIn,
+  httpHandler(async (req, res, next) => {
+    console.log('staged');
+    const userId = req.user._id;
+    const { query, page = 1, size = 10 } = req.query;
+    const records = await productService.buyer.fetchBuyHistory({
+      user_id: userId,
+      query,
+      page: parseInt(page.toString(), 10),
+      size: parseInt(size.toString(), 10),
+    });
+    res.send(records);
+  })
+);
+
 export default buyerRouter;

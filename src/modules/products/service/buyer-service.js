@@ -80,12 +80,39 @@ buyer.buyProduct = async ({ user_id, product_id, amount }) => {
     name: product.name,
     price: product.price * amount,
   });
-  await productModels.wallet.findByIdAndUpdate(user_id, {
+  await productModels.wallet.findByIdAndUpdate(userWallet._id, {
     amount: userWallet.amount - product.price * amount,
   });
-  await productModels.wallet.findByIdAndUpdate(product.user_id, {
+  await productModels.wallet.findByIdAndUpdate(sellerWallet._id, {
     amount: sellerWallet.amount + product.price * amount,
   });
+};
+
+buyer.fetchBuyHistory = async ({
+  user_id,
+  query = {},
+  page = 1,
+  size = 10,
+}) => {
+  console.log('stage 1');
+  const records = await productModels.buy_record
+    .find(
+      {
+        user_id,
+        ...query,
+      },
+      { __v: 0 }
+    )
+    .sort({ date: 1 })
+    .skip((page - 1) * size)
+    .limit(size);
+  console.log('stage 2');
+  assert(
+    records !== null,
+    createError(StatusCodes.BAD_REQUEST, 'You dont bought any product')
+  );
+  console.log('stage 3');
+  return records;
 };
 
 export default buyer;

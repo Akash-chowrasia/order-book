@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import buyerRouter from './bye-route';
+import buyerRouter from './buy-route';
 import sellerRouter from './sell-route';
 import walletRouter from './wallet-route';
 
