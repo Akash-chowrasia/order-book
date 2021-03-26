@@ -8,7 +8,7 @@ const walletRouter = Router();
 walletRouter.get(
   '/',
   authMiddleware.isLoggedIn,
-  httpHandler(async (req, res, next) => {
+  httpHandler(async (req, res) => {
     const userId = req.user._id;
     const record = await productService.wallet.getWallet(userId);
     res.send(record);
@@ -18,7 +18,7 @@ walletRouter.get(
 walletRouter.post(
   '/',
   authMiddleware.isLoggedIn,
-  httpHandler(async (req, res, next) => {
+  httpHandler(async (req, res) => {
     const userId = req.user._id;
     const { amount } = req.body;
     await productService.wallet.addWallet({ user_id: userId, amount });

@@ -19,7 +19,10 @@ buyer.fetchProduct = async ({ user_id, query = {}, page = 1, size = 10 }) => {
     .limit(size);
   assert(
     records !== null,
-    createError(StatusCodes.BAD_REQUEST, 'Sorry, we dont have any product')
+    createError(
+      StatusCodes.BAD_REQUEST,
+      'Sorry, we dont have any product at this time'
+    )
   );
   return records;
 };

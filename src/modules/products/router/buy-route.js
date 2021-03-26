@@ -8,7 +8,7 @@ const buyerRouter = Router();
 buyerRouter.get(
   '/',
   authMiddleware.isLoggedIn,
-  httpHandler(async (req, res, next) => {
+  httpHandler(async (req, res) => {
     const userId = req.user._id;
     const { query, page = 1, size = 10 } = req.query;
     const records = await productService.buyer.fetchProduct({
@@ -22,9 +22,25 @@ buyerRouter.get(
 );
 
 buyerRouter.get(
+  '/history',
+  authMiddleware.isLoggedIn,
+  httpHandler(async (req, res) => {
+    const userId = req.user._id;
+    const { query, page = 1, size = 10 } = req.query;
+    const records = await productService.buyer.fetchBuyHistory({
+      user_id: userId,
+      query,
+      page: parseInt(page.toString(), 10),
+      size: parseInt(size.toString(), 10),
+    });
+    res.send(records);
+  })
+);
+
+buyerRouter.get(
   '/:category',
   authMiddleware.isLoggedIn,
-  httpHandler(async (req, res, next) => {
+  httpHandler(async (req, res) => {
     const userId = req.user._id;
     const { category } = req.params;
     const { query, page = 1, size = 10 } = req.query;
@@ -42,7 +58,7 @@ buyerRouter.get(
 buyerRouter.post(
   '/:product_id',
   authMiddleware.isLoggedIn,
-  httpHandler(async (req, res, next) => {
+  httpHandler(async (req, res) => {
     const userId = req.user._id;
     const { product_id } = req.params;
     const { amount } = req.body;
@@ -52,23 +68,6 @@ buyerRouter.post(
       amount,
     });
     res.send({ message: 'successful, enjoy your order' });
-  })
-);
-
-buyerRouter.get(
-  '/history',
-  authMiddleware.isLoggedIn,
-  httpHandler(async (req, res, next) => {
-    console.log('staged');
-    const userId = req.user._id;
-    const { query, page = 1, size = 10 } = req.query;
-    const records = await productService.buyer.fetchBuyHistory({
-      user_id: userId,
-      query,
-      page: parseInt(page.toString(), 10),
-      size: parseInt(size.toString(), 10),
-    });
-    res.send(records);
   })
 );
 

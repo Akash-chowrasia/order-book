@@ -22,6 +22,8 @@ authMiddleware.isLoggedIn = httpHandler(async (req, res, next) => {
   );
 
   req.user = await userService.getUserById(record.user_id);
+
+  console.log('baby i am here');
   next();
 });
 

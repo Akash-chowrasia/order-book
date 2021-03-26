@@ -8,7 +8,7 @@ const sellerRouter = Router();
 sellerRouter.post(
   '/',
   authMiddleware.isLoggedIn,
-  httpHandler(async (req, res, next) => {
+  httpHandler(async (req, res) => {
     const userId = req.user._id;
     const details = req.body;
     await productService.seller.addProduct({ user_id: userId, details });
@@ -19,7 +19,7 @@ sellerRouter.post(
 sellerRouter.get(
   '/',
   authMiddleware.isLoggedIn,
-  httpHandler(async (req, res, next) => {
+  httpHandler(async (req, res) => {
     const userId = req.user._id;
     const { query, page = 1, size = 10 } = req.query;
     const records = await productService.seller.fetchProduct({
@@ -35,7 +35,7 @@ sellerRouter.get(
 sellerRouter.get(
   '/sold',
   authMiddleware.isLoggedIn,
-  httpHandler(async (req, res, next) => {
+  httpHandler(async (req, res) => {
     const userId = req.user._id;
     const { query, page = 1, size = 10 } = req.query;
     const records = await productService.seller.fetchSoldProduct({
