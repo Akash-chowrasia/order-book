@@ -6,11 +6,11 @@ import productModels from '../model';
 const seller = {};
 
 seller.addProduct = async ({ details, user_id }) => {
-  const record = await productModels.product.create({ ...details, user_id });
+  await productModels.product.create({ ...details, user_id });
 };
 
 seller.fetchProduct = async ({ user_id, query = {}, page = 1, size = 10 }) => {
-  const records = productModels.product
+  const records = await productModels.product
     .find(
       {
         user_id,
@@ -34,7 +34,7 @@ seller.fetchSoldProduct = async ({
   page = 1,
   size = 10,
 }) => {
-  const records = productModels.sold_record
+  const records = await productModels.sold_record
     .find(
       {
         user_id,
